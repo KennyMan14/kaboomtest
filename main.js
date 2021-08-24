@@ -1,85 +1,81 @@
-loadSprite("tile", "/sprites/tile.png");
-loadSprite("knight", "/sprites/knight.png");
-loadSprite("coin", "/sprites/coin.png");
+// Define some constants
+// const coincollected = play("collect", {
+//   volume: 10,
+//   speed: 2,
+//   detune: 1200,
+// });
 
-const TILE_W = 16;
-const TILE_H = 16;
+layers([
+	"game",
+	"ui",
+], "game");
 
-const MOVE_SPEED = 120;
-const SCALE = 0.5;
-const JUMP_FORCE = 500;
+camIgnore([ "ui", ]);
 
-const FLOOR = 65;
-const PRIZE = 25;
+const map = addLevel([
+  "                   ",
+  "                   ",
+  "                   ",
+  "                 $ ",
+  "                ===",
+  "           ====    ",
+  "==========         ",
+], {
+  width: 20,
+  height: 20,
+  pos: vec2(0, 0),
+  "=": [
+    sprite("ground"),
+    solid(),
+    "wall"
+  ],
+  "$": [
+    sprite("coin"),
+    area(),
+    "coin"
+  ],
+});
+
+const score = add([
+	text("0"),
+	pos(6, 6),
+	layer("ui"),
+	{
+		value: 0,
+	},
+]);
 
 const player = add([
   sprite("knight"),
-  pos(80, 80),
-  scale(SCALE),
+  pos(50, 50),
+  //we need area to detect collisions
+  area(),
+  scale(1),
+  origin("center"),
   body(),
 ]);
 
-addLevel([
-  "                                     ",
-	"                                     ",
-	"                                     ",
-	"                        %            ",
-	"                    ======           ",
-	"                                     ",
-	"         ===                         ",
-	"                                     ",
-	"                                     ",
-	"                                     ",
-	"                                     ",
-	"====================================="
-], {
-	width: TILE_W,
-	height: TILE_H,
-	"=": [
-		sprite("tile", {
-			frame: FLOOR,
-		}),
-		area(vec2(0, 0), vec2(TILE_W, 8)),
-		solid(),
-	],
-  "%": [
-    sprite("coin"),
-		area(),
-		origin("center"),
-  ]
+player.collides("coin", (c) => {
+  // coincollected.play();
+  score.value++;
+  score.text = score.value;
+  destroy(c);
+})
+
+keyPress('space', () => {
+  if(player.grounded()){
+    player.jump(240)
+  }
 });
 
-player.collides("coin", coin => {
-	destroy(coin);
-  console.log('hello');
-});
-
-// move left
 keyDown("left", () => {
-	player.move(-MOVE_SPEED, 0);
+	player.move(-120, 0);
+  player.scale.x = -1;
 });
 
-// move right
 keyDown("right", () => {
-	player.move(MOVE_SPEED, 0);
-});
-
-keyPress("space", () => {
-	// these 2 functions are provided by body() component
-	if (player.grounded()) {
-		player.jump(JUMP_FORCE); 
-	}
-});
-
-keyPress("left", () => {
-	player.scale.x = -SCALE;
-	// player.play("run");
-});
-
-keyPress("right", () => {
-	player.scale.x = SCALE;
-	// player.play("run");
-	player.move(MOVE_SPEED, 0);
+	player.move(120, 0);
+  player.scale.x = 1;
 });
 
 player.action(() => {
