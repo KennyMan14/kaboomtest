@@ -1,2 +1,2 @@
 # kaboomtest
-Experiment with kaboom.js
+Experiment with kaboom.js :)
