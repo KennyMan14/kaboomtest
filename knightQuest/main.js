@@ -1,4 +1,4 @@
-let keyCollected = play("collected");
+const keyCollected = play("collected");
 
 scene("main", (levelInx) => {
   const SPEED = 80;
@@ -9,25 +9,25 @@ scene("main", (levelInx) => {
       sprite: "npc1",
       msg: "the king must be furious with me... I LOST HIS ANIMALS!!",
       name: "farmer",
-      textsize: 10,
+      textsize: 8,
     },
     "k": {
       sprite: "npc2",
       msg: "i can not have anything! I always lose everything!",
       name: "king",
-      textsize: 10,
+      textsize: 8,
     },
     "q": {
       sprite: "npc3",
       msg: "oh no! someone stole my diamond necklace, can you help me?",
       name: "queen",
-      textsize: 10,
+      textsize: 8,
     },
     "e": {
       sprite: "npc4",
-      msg: "so,you're the new guy,huh? This castle has a secret, it has a hidden room go to the armery, but be careful with traps and puzzles",
+      msg: "so,you're the new guy,huh? This castle has a secret, it has a hidden room. \n go to the armery but be careful with traps and puzzles",
       name: "elite",
-      textsize: 6,
+      textsize: 8,
     },
     "s": {
       sprite: "npc5",
@@ -37,15 +37,33 @@ scene("main", (levelInx) => {
     },
     "m": {
       sprite: "npc6",
-      msg: "For the chains of Utama! Who's the bandido who released my ghosts??!! Please be careful, they're dangerous!",
+      msg: "For the chains of Utama! Who's the bandido who released my ghosts??!! \n Please be careful, they're dangerous!",
       name: "mage",
-      textsize: 6,
+      textsize: 8,
     },
     "a": {
       sprite: "npc7",
-      msg: "Agh!These ghosts are so annoying, they interrupted me and I had to escape from the armory be careful boy i activated the traps",
+      msg: "Agh!These ghosts are so annoying i was working and they interrupted me \n I had to escape from the armory be careful boy i activated the traps",
       name: "armorer",
-      textsize: 5,
+      textsize: 8,
+    },
+    "l": {
+      sprite: "npc8",
+      msg: "Thank God you are here, look... \n someone stole all my alchemist kit, please, bring it back, brave knight",
+      name: "alchemeister",
+      textsize: 8,
+    },
+    "d": {
+      sprite: "npc9",
+      msg: "And like a flash of light, my salvation comes. \n Oh brave knight, some robber stole my pen find it for me, please",
+      name: "playwright",
+      textsize: 8,
+    },
+    "p": {
+      sprite: "npc10",
+      msg: "Nice to see you again, knight. I was here because of a rumor, you know, the thief \n i wanted to find him, but he's fast. \n be careful with ghouls, they can kill you in an instant",
+      name: "specter knight",
+      textsize: 6,
     },
   };
 
@@ -140,7 +158,48 @@ scene("main", (levelInx) => {
     "=         *       =",
     "=      ^      *   =",
     "===================",
-  ],
+  ], [
+    "===================",
+    "=l  ^       ^     |",
+    "=   ^       ^ *   =",
+    "=   ^   ^   ^    *=",
+    "=@  ^   ^   ^ *   =",
+    "=       ^        *=",
+    "=       ^         =",
+    "===================",    
+  ], [
+    "=====================",
+    "=@   ^^^^^^^^^^^    =",
+    "=              ^    =",
+    "=    ^^^^^^^^^^^    =",
+    "=              ^    =",
+    "=    ^^^^^^^^^^^    =",
+    "=         ^    ^    =",
+    "=         ^    ^    =",
+    "=    ^            $ =",
+    "=    ^            d =",
+    "===========|=========",
+  ], [
+    "-------------------",
+    "-        @        -",
+    "-                 -",
+    "-     ~     ~     -",
+    "-                 >",
+    "-      ^ ! ^      -",
+    "-     ^^^^^^^     -",
+    "-------------------",
+  ], [
+    "-------------------------",
+    "-p      #        #      >",
+    "-           #           -",
+    "-           #        ^^^-",
+    "-@      #        #      -",
+    "-           #           -",
+    "-           #        ^^^-",
+    "-       #        #      -",
+    "-^^^^^^^^       ^^^^^^^^-",
+    "-------------------------",
+  ]
 ];
 
   const map = addLevel(levels[levelInx], {
@@ -160,12 +219,14 @@ scene("main", (levelInx) => {
     ],
     "@": [
       sprite("char"),
-      area(),
+      scale(SCALE),
+      origin("center"),
+      area(vec2(2), vec2(2)),
       "player",
     ],
     "$": [
       sprite("key"),
-      area(vec2(5), vec2(5)),
+      area(),
       "key",
     ],
     "^": [
@@ -175,7 +236,33 @@ scene("main", (levelInx) => {
     ],
     "*": [
       sprite("ghost"),
-      area(vec2(8), vec2(8)),
+      area(vec2(3), vec2(3)),
+      "hazard",
+    ],
+    "-": [
+      sprite("wall2"),
+      solid(),
+      area(),
+    ],
+    ">": [
+      sprite("stairs"),
+      solid(),
+      area(),
+      "door",
+    ],
+    "~": [
+      sprite("anvil"),
+      solid(),
+      area(),
+    ],
+    "!": [
+      sprite("furnace"),
+      solid(),
+      area(),
+    ],
+    "#": [
+      sprite("ghoul"),
+      area(vec2(3), vec2(3)),
       "hazard",
     ],
     any(ch) {
@@ -210,7 +297,7 @@ scene("main", (levelInx) => {
 
   player.overlaps("door", () => {
     // if(levelInx  2){
-      if(levelInx == 2 || levelInx == 3 || levelInx == 4 || levelInx == 7 || levelInx == 8){
+      if(levelInx == 2 || levelInx == 3 || levelInx == 4 || levelInx == 7 || levelInx == 8 || levelInx == 10){
         if(hasKey == true){
           go("main", levelInx + 1);
         }else {
@@ -256,10 +343,27 @@ scene("main", (levelInx) => {
       //   destroy(doorText);
       // }
     });
-    keyDown(dir, () => {
-      player.move(dirs[dir].scale(SPEED));
-    });
-  }
+  };
+
+  keyDown("left", () => {
+    player.move(-SPEED, 0);
+  })
+  keyDown("right", () => {
+    player.move(SPEED, 0);
+  })
+  keyDown("down", () => {
+    player.move(0, SPEED);
+  })
+  keyDown("up", () => {
+    player.move(0, -SPEED);
+  })
+
+  keyPress("left", () => {
+    player.scale.x = -SCALE;
+  })
+  keyPress("right", () => {
+    player.scale.x = SCALE;
+  })
 
   // keyPress("right", () => {
   //   player.scale.x = SCALE;
