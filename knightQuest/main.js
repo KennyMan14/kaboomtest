@@ -25,7 +25,7 @@ scene("main", (levelInx) => {
     },
     "e": {
       sprite: "npc4",
-      msg: "so,you're the new guy,huh? This castle has a secret, it has a hidden room. \n go to the armery but be careful with traps and puzzles",
+      msg: "so,you're the new guy,huh? This castle has a secret, it has a hidden room. go to the armery but be careful with traps and puzzles",
       name: "elite",
       textsize: 8,
     },
@@ -37,34 +37,52 @@ scene("main", (levelInx) => {
     },
     "m": {
       sprite: "npc6",
-      msg: "For the chains of Utama! Who's the bandido who released my ghosts??!! \n Please be careful, they're dangerous!",
+      msg: "For the chains of Utama! Who's the bandido who released my ghosts??!! Please be careful, they're dangerous!",
       name: "mage",
       textsize: 8,
     },
     "a": {
       sprite: "npc7",
-      msg: "Agh!These ghosts are so annoying i was working and they interrupted me \n I had to escape from the armory be careful boy i activated the traps",
+      msg: "Agh!These ghosts are so annoying i was working and they interrupted me I had to escape from the armory be careful boy i activated the traps",
       name: "armorer",
       textsize: 8,
     },
     "l": {
       sprite: "npc8",
-      msg: "Thank God you are here, look... \n someone stole all my alchemist kit, please, bring it back, brave knight",
+      msg: "Thank God you are here, look... someone stole all my alchemist kit, please, bring it back, brave knight",
       name: "alchemeister",
       textsize: 8,
     },
     "d": {
       sprite: "npc9",
-      msg: "And like a flash of light, my salvation comes. \n Oh brave knight, some robber stole my pen find it for me, please",
+      msg: "And like a flash of light, my salvation comes. Oh brave knight, some robber stole my pen find it for me, please",
       name: "playwright",
       textsize: 8,
     },
     "p": {
       sprite: "npc10",
-      msg: "Nice to see you again, knight. I was here because of a rumor, you know, the thief \n i wanted to find him, but he's fast. \n be careful with ghouls, they can kill you in an instant",
+      msg: "Nice to see you again, knight. I was here because of a rumor, you know, the thief i wanted to find him, but he's fast. be careful with ghouls, they can kill you in an instant",
       name: "specter knight",
       textsize: 6,
     },
+    "g": {
+      sprite: "npc11",
+      msg: "And this is what you are fighting for. Those stairs are going to take you to the hidden room. But be careful with poison skulls. They induce a dose of venom that kills you instantly \n By the way, if you find my notes, please lemme know",
+      name: "plague doctor",
+      textsize: 6,
+    },
+    "n": {
+      sprite: "npc12",
+      msg: "From your surprised face I can assume that the king did not tell you that there was a dungeon, I'm enchantress, and i was captured by the king many years ago, oh! so, you're here because of the thief, go ahead and you'll find it",
+      name: "enchantress",
+      textsize: 6,
+    },
+    "r": {
+      sprite: "npc13",
+      msg: "I am the fire knight. And i was an old enemy of South kingdom, but not anymore... The king captured me, and took me here. Now, i just stay here. Go ahead, stop that varmint. But be carful with my blazorbs",
+      name: "fire knight",
+      textsize: 6,
+    }
   };
 
   const levels = [[
@@ -199,6 +217,87 @@ scene("main", (levelInx) => {
     "-       #        #      -",
     "-^^^^^^^^       ^^^^^^^^-",
     "-------------------------",
+  ], [
+    "----------------------",
+    "-@       ^           -",
+    "-        ^           -",
+    "-        ^           -",
+    "-^^^^^   !    ^^^^   -",
+    "- ~~                 -",
+    "-````       #        -",
+    "------------------>---",
+  ], [
+    "----------------------",
+    "-  @     #          !-",
+    "-           #*****  ^-",
+    "-^^^^^           *  ^-",
+    "-    ^^^^^       *  ^-",
+    ">                *   -",
+    "-           #    *   -",
+    "----------------------",
+  ], [
+    "-------------------------",
+    "-g   ^         ^       `-",
+    "-    ^    ~    ^       ~-",
+    "-@   ^    #    ^   #   !-",
+    "-    ^    ¡    ^   ¡    -",
+    "-    ^    *    ^   *    -",
+    "-    ^    ¡    ^   ¡    -",
+    "-`   ^    #    ^   #    -",
+    "-`   !~   ¡    `   ¡    -",
+    "-`        *        *    -",
+    "---------------------->--",
+  ], [
+    "≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈",
+    "≈  @        #        ≈",
+    "≈           #        ≈",
+    "≈•••••   ••••••••••••≈",
+    "≈        •           ≈",
+    "≈        •           ≈",
+    "≈n       •           ≈",
+    "≈≈≈≈/≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈",
+  ], [
+    "≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈",
+    "≈  @    •   •        ≈",
+    "≈           •        ≈",
+    "≈•••••      •   ¡    ≈",
+    "≈           •   ¡    ≈",
+    "≈               ¡    ≈",
+    "≈               ¡    /",
+    "≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈",
+  ], [
+    "≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈",
+    "/     •        •    r≈",
+    "≈     •        •     ≈",
+    "≈ %       %          ≈",
+    "≈ •       •          ≈",
+    "≈•••••••••••••••     ≈",
+    "≈                    ≈",
+    "≈@                   ≈",
+    "≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈",
+  ], [
+    "≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈",
+    "≈@  •        •    %           ≈",
+    "≈   •    %        %       %%%%≈",
+    "≈   •             %   •   %   ≈",
+    "≈   •        •    %   •   %   /",
+    "≈   •             %   •       ≈",
+    "≈        %            •       ≈",
+    "≈            •        •   %   ≈",
+    "≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈",
+  ], [
+    "≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈",
+    "≈                •    ≈",
+    "≈@               •    ≈",
+    "≈    ••••••••    •    ≈",
+    "≈    •           •    ≈",
+    "≈••••••••••••    •    ≈",
+    "≈                     ≈",
+    "≈                     ≈",
+    "≈%%%%%%%     •••••••••≈",
+    "≈                     ≈",
+    "≈                     ≈",
+    "≈≈/≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈",
   ]
 ];
 
@@ -265,6 +364,38 @@ scene("main", (levelInx) => {
       area(vec2(3), vec2(3)),
       "hazard",
     ],
+    "`": [
+      sprite("weapons"),
+      area(),
+      solid(),
+    ],
+    "¡": [
+      sprite("poisonskull"),
+      area(),
+      solid(),
+    ],
+    "≈": [
+      sprite("wall3"),
+      area(),
+      solid(),
+    ],
+    "•": [
+      sprite("spikes"),
+      area(),
+      "hazard",
+    ],
+    "/": [
+      sprite("door2"),
+      solid(),
+      area(),
+      "door",
+    ],
+    "%": [
+      sprite("blazorb"),
+      solid(),
+      area(),
+      "hazard",
+    ],
     any(ch) {
       const char = npc[ch];
       if (char) {
@@ -288,7 +419,9 @@ scene("main", (levelInx) => {
 
   function talk(msg, char, size) {
     talking = add([
-      text(char + ": " + msg, size),
+      text(char + ": " + msg, size, {
+        width: 700,
+      }),
       color(1, 1, 1),
     ])
   }
@@ -389,5 +522,5 @@ scene("gameover", (lvlIndex) => {
 	mouseClick(() => go("main", lvlIndex));
 });
 
-go("main", 0);
+go("main", 18);
 focus();
