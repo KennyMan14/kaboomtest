@@ -82,7 +82,20 @@ scene("main", (levelInx) => {
       msg: "I am the fire knight. And i was an old enemy of South kingdom, but not anymore... The king captured me, and took me here. Now, i just stay here. Go ahead, stop that varmint. But be carful with my blazorbs",
       name: "fire knight",
       textsize: 6,
-    }
+    },
+    "d": {
+      sprite: "npc14",
+      msg: "I can see it, you're here for the thief. You will not like the identity of the thief, but i will not tell you, it's a real surprise. HA HA HA",
+      name: "red samurai",
+      textsize: 6,
+    },
+    "w": {
+      sprite: "npc15",
+      msg: "Be careful, knight. Don't ask questions if you don't want to know the answer.",
+      name: "skeleton king",
+      textsize: 6,
+      tag: "boss",
+    },
   };
 
   const levels = [[
@@ -287,7 +300,7 @@ scene("main", (levelInx) => {
     "≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈",
   ], [
     "≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈",
-    "≈                •    ≈",
+    "≈d               •    ≈",
     "≈@               •    ≈",
     "≈    ••••••••    •    ≈",
     "≈    •           •    ≈",
@@ -298,6 +311,48 @@ scene("main", (levelInx) => {
     "≈                     ≈",
     "≈                     ≈",
     "≈≈/≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈",
+  ], [
+    "≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈",
+    "≈ @            •      •••          /",
+    "≈              •        •          ≈",
+    "≈•••••••••••   ••  •••  •   •••••••≈",
+    "≈              •   •    •          ≈",
+    "≈              •   •    •          ≈",
+    "≈   ••••••••••••  ••  •••          ≈",
+    "≈              •   •    ••••••••   ≈",
+    "≈                  •               ≈",
+    "≈ •••••••••••     ••••••••         ≈",
+    "≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈",
+  ], [
+    "≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈",
+    "≈@             ¡           ¡       ≈",
+    "≈w   ¡                     ¡       ≈",
+    "≈         %         %      ¡    %  ≈",
+    "≈         %         %              ≈",
+    "≈    ¡         ¡                   /",
+    "≈         %         %              ≈",
+    "≈         %         %      ¡    %  ≈",
+    "≈    ¡                     ¡       ≈",
+    "≈              ¡           ¡       ≈",
+    "≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈",
+  ], [
+    "≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈",
+    "≈                ≈",
+    "≈                ≈",
+    "≈     •••••••    ≈",
+    "≈     •          ≈",
+    "≈@    •          ≈",
+    "≈     •    ••••••≈",
+    "≈     •    •     ≈",
+    "≈     •    •     ≈",
+    "≈     •    •     ≈",
+    "≈≈≈≈≈≈≈≈≈/≈≈≈≈≈≈≈≈",
+  ], [
+    "≈≈≈≈≈",
+    "≈ @ ≈",
+    "≈   ≈",
+    "≈ æ ≈",
+    "≈≈≈≈≈",
   ]
 ];
 
@@ -396,6 +451,12 @@ scene("main", (levelInx) => {
       area(),
       "hazard",
     ],
+    "æ": [
+      sprite("prince"),
+      solid(),
+      area(),
+      "final",
+    ],
     any(ch) {
       const char = npc[ch];
       if (char) {
@@ -427,6 +488,10 @@ scene("main", (levelInx) => {
   }
 
   const player = get("player")[0];
+
+  player.overlaps("final", () => {
+    go("ending", 0);
+  });
 
   player.overlaps("door", () => {
     // if(levelInx  2){
