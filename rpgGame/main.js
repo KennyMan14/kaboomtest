@@ -452,7 +452,7 @@ scene("main", (levelInx) => {
       "hazard",
     ],
     "æ": [
-      sprite("prince"),
+      sprite("thief"),
       solid(),
       area(),
       "final",
@@ -587,5 +587,49 @@ scene("gameover", (lvlIndex) => {
 	mouseClick(() => go("main", lvlIndex));
 });
 
-go("main", 20);
+scene("final", (idx) => {
+  const finals = {
+    f: {
+      sprite: "first",
+    },
+    s: {
+      sprite: "second",
+    },
+    t: {
+      sprite: "third",
+    },
+  };
+  const text = [
+    "The knight faced the thief, and after defeated him, he discovered that he was the king's son. And now, he will be in prision",
+    "He was upset because he wanted to be a knight, and the knight took his place. So he made an evil plan, and executed it",
+    "He stole all the things that are missing, even the animals. He released the ghost and monsters, and that way he wouldn't be discovered. Now the kingdom is safe, and the prince is suffering for his actions"
+  ];
+  add([
+    sprite(finals[idx]),
+    pos(width()/2, 20),
+    origin("center"),
+  ]);
+  add([
+    text(text[idx]),
+    pos(width()/2, height()/4),
+    origin("center"),
+  ]);
+  keyPress("space", () => {
+    if(idx < 3){
+      go("final", idx+1);
+    }else {
+      go("thanks");
+    }
+  })
+})
+
+scene("thanks", () => {
+  add([
+    text("You get to the end of the game! Thanks for playing!", 15),
+    pos(width()/2, height()/3),
+    origin("center"),
+  ])
+})
+
+go("main", 0);
 focus();
