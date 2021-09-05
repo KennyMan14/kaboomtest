@@ -1,8 +1,10 @@
-const keyCollected = play("collected");
-
+const music = play("music", {
+  volume: 0.5,
+})
 scene("main", (levelInx) => {
   const SPEED = 80;
   const SCALE = 1;
+  music.loop();
 
   const npc = {
     "f": {
@@ -53,7 +55,7 @@ scene("main", (levelInx) => {
       name: "alchemeister",
       textsize: 8,
     },
-    "d": {
+    "o": {
       sprite: "npc9",
       msg: "And like a flash of light, my salvation comes. Oh brave knight, some robber stole my pen find it for me, please",
       name: "playwright",
@@ -208,7 +210,7 @@ scene("main", (levelInx) => {
     "=         ^    ^    =",
     "=         ^    ^    =",
     "=    ^            $ =",
-    "=    ^            d =",
+    "=    ^            o =",
     "===========|=========",
   ], [
     "-------------------",
@@ -353,8 +355,8 @@ scene("main", (levelInx) => {
     "≈   ≈",
     "≈ æ ≈",
     "≈≈≈≈≈",
-  ]
-];
+  ],
+  ];
 
   const map = addLevel(levels[levelInx], {
     width: 20,
@@ -517,7 +519,10 @@ scene("main", (levelInx) => {
 
   // if(levelInx == 2 || levelInx == 3){
     player.overlaps("key", (key) => {
-      play("collected");
+      play("collected", {
+        volume: 0.1,
+        speed: 1.2,
+    });
 	  	destroy(key);
       // keyCollected.play();
 	  	hasKey = true;
@@ -588,6 +593,7 @@ scene("gameover", (lvlIndex) => {
 });
 
 scene("ending", (idx) => {
+  music.stops()
   const finals = ["first", "second", "third"];
   const t = [
     "The knight faced the thief, and after defeated him, he discovered that he was the king's son. And now, he will be in prision",
@@ -625,5 +631,5 @@ scene("thanks", () => {
   ])
 })
 
-go("main", 20);
+go("main", 0);
 focus();
