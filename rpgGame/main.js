@@ -1,5 +1,5 @@
 const music = play("music", {
-  volume: 0.5,
+  volume: 0.2,
 })
 scene("main", (levelInx) => {
   const SPEED = 80;
