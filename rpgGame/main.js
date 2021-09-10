@@ -593,7 +593,8 @@ scene("gameover", (lvlIndex) => {
 });
 
 scene("ending", (idx) => {
-  music.stop()
+  music.unloop();
+  music.pause();
   const finals = ["first", "second", "third"];
   const t = [
     "The knight faced the thief, and after defeated him, he discovered that he was the king's son. And now, he will be in prision",
