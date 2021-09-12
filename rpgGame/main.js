@@ -430,6 +430,7 @@ scene("main", (levelInx) => {
       sprite("poisonskull"),
       area(),
       solid(),
+      "hazard"
     ],
     "≈": [
       sprite("wall3"),
@@ -522,7 +523,7 @@ scene("main", (levelInx) => {
       play("collected", {
         volume: 0.1,
         speed: 1.2,
-    });
+      });
 	  	destroy(key);
       // keyCollected.play();
 	  	hasKey = true;
